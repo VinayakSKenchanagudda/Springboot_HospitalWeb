@@ -1,0 +1,32 @@
+package com.ty.springboot_hospital.util;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.context.annotation.Configuration;
+
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
+import springfox.documentation.service.VendorExtension;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+@Configuration
+@EnableSwagger2
+public class ApplicationConfig {
+
+	public Docket getDocket()
+	{
+		Contact contact=new Contact("Vinayak","vinsupport@123","9482666022");
+		
+		List<VendorExtension> vendors=new ArrayList<>();
+		
+		ApiInfo apiInfo= new ApiInfo("HospitalApp", "Hospital App v1.0", "v1.o","1 year",contact,"54673","www.ty.com", vendors);
+		
+		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("com.ty.springboot_hospital"))
+				.build().apiInfo(apiInfo).useDefaultResponseMessages(false);
+		
+	}
+}
